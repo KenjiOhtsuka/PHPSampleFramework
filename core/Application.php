@@ -8,13 +8,13 @@ abstract class Application {
   protected $session;
   protected $dbManager;
 
-  function __construct($debug) {
+  function __construct(bool $debug) {
     $this->setDebugMode($debug);
     $this->initialize();
     $this->configure();
   }
 
-  protected function setDebugMode($debug) {
+  protected function setDebugMode(bool $debug) {
     if ($debug) {
       $this->debug = true;
       ini_set('display_errors', 1);
@@ -40,39 +40,39 @@ abstract class Application {
   abstract function getRootDir();
   abstract protected function registerRoutes();
 
-  function isDebugMode() {
+  function isDebugMode(): bool {
     return $this->debug;
   }
 
-  function getRequest() {
+  function getRequest(): string {
     return $this->request;
   }
 
-  function getResponse() {
+  function getResponse(): string {
     return $this->response;
   }
 
-  function getSession() {
+  function getSession(): string {
     return $this->session;
   }
 
-  function getDbManager() {
+  function getDbManager(): string {
     return $this->dbManager;
   }
 
-  function getControllerDir() {
+  function getControllerDir(): string {
     return $this->getRootDir() . '/controllers';
   }
 
-  function getViewDir() {
+  function getViewDir(): string {
     return $this->getRootDir() . '/views';
   }
 
-  function getModelDir() {
+  function getModelDir(): string {
     return $this->getRootDir() . '/models';
   }
 
-  function getWebDir() {
+  function getWebDir(): string {
     return $this->getRootDir() . '/web';
   }
 
