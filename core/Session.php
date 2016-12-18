@@ -1,6 +1,6 @@
 <?php
 
-class Section {
+class Session {
   protected static $sessionStarted = false;
   protected static $sessionIdRegenerated = false;
 

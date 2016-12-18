@@ -14,7 +14,7 @@ abstract class Application {
     $this->configure();
   }
 
-  protected function setDebugMode(bool $debug) {
+  protected function setDebugMode(bool $debug): Application {
     if ($debug) {
       $this->debug = true;
       ini_set('display_errors', 1);
@@ -23,6 +23,7 @@ abstract class Application {
       $this->debug = false;
       ini_set('display_errors', 0);
     }
+    return $this;
   }
 
   protected function initialize() {
@@ -80,7 +81,7 @@ abstract class Application {
     try {
       $params = $this->router->resolve($this->request->getPathInfo());
       if ($params === false) {
-
+        throw new HttpNotFoundException('No route found for ' . $this->request->getPathInfo());
       }
 
       $controller = $params['controller'];
@@ -99,7 +100,7 @@ abstract class Application {
     $controllerClass = ucfirst($controllerName) . 'Controller';
     $controller = $this->findController($controllerClass);
     if ($controller === false) {
-      
+      throw new HttpNotFoundException($controllerClass . ' controller is not found.');
     }
     $content = $controller->run($action, $params);
     $this->response->setContent($content);
@@ -121,7 +122,7 @@ abstract class Application {
 
   protected function render404Page($e) {
     $this->response->setStatusCode(404, 'Not Found');
-    $message = $this->isDebugMode() ? $e->getMessag() : 'Page not found.';
+    $message = $this->isDebugMode() ? $e->getMessage() : 'Page not found.';
     $message = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
 
     $this->response->setContent(<<<EOF

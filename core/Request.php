@@ -45,7 +45,7 @@ class Request {
     if (false !== ($pos = strpos($requestUri, '?')))
       $requestUri = substr($requestUri, 0, $pos);
 
-    $pathInfo = (string) substr($requestUri, strle($baseUrl));
+    $pathInfo = (string) substr($requestUri, strlen($baseUrl));
 
     return $pathInfo;
   }
