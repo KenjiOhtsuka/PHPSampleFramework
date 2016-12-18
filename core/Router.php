@@ -26,7 +26,16 @@ class Router {
 
   function resolve($pathInfo) {
     if ('/' !== substr($pathInfo, 0, 1)) {
-
+      $pathInfo = '/' . $pathInfo;
     }
+
+    foreach ($this->routes as $pattern => $params) {
+      if (preg_match('#^' . $pattern . '$#', $pathInfo, $matches)) {
+        $params = array_merge($params, $matches);
+        return $params;
+      }
+    }
+
+    return false;
   }
 }
