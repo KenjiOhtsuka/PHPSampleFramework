@@ -1,5 +1,7 @@
 <?php
 
+namespace core;
+
 class DbManager {
   protected $connecions = [];
   protected $repositories = [];

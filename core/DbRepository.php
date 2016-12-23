@@ -1,5 +1,7 @@
 <?php
 
+namespace core;
+
 abstract class DbManager {
   protected $connection;
 

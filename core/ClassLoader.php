@@ -1,5 +1,7 @@
 <?php
 
+namespace core;
+
 class ClassLoader {
   protected $dirs = [];
 
@@ -11,7 +13,8 @@ class ClassLoader {
     $this->dirs[] = $dir;
   }
 
-  public function loadClass($class) {
+  public function loadClass(string $class): bool {
+    $class = str_replace('\\', '/', $class);
     foreach ($this->dirs as $dir) {
       $file = $dir . '/' . $class . '.php';
       if (is_readable($file)) {

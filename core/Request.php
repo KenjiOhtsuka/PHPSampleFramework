@@ -1,4 +1,7 @@
 <?php
+
+namespace core;
+
 class Request {
   function isPost() {
     return $_SERVER['REQUEST_METHOD'] === 'POST';
@@ -27,7 +30,7 @@ class Request {
     return $_SERVER['REQUEST_URI'];
   }
 
-  function getBaseUrl() {
+  function getBaseUrl(): string {
     $scriptName = $_SERVER['SCRIPT_NAME'];
     $requestUri = $this->getRequestUri();
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace core;
+
 abstract class Application {
   protected $debug = false;
   protected $loginAction = [];

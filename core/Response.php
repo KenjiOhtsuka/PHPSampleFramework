@@ -1,5 +1,7 @@
 <?php
 
+namespace core;
+
 class Response {
   protected $content;
   protected $statusCode = 200;
