@@ -7,24 +7,24 @@ class DbManager {
   protected $repositories = [];
   protected $repositoryConnectionMap = [];
 
-  function connect($name, $params) {
+  function connect(string $name, array $params) {
     $params = array_merge([
       'dsn' => null,
-      'user' => '',
-      'password' => '',
+      'user' => null,
+      'password' => null,
       'options' => [],
     ], $params);
 
-    $con = new PDO(
+    $connection = new \PDO(
       $params['dsn'],
       $params['user'],
       $params['password'],
       $params['options']
     );
 
-    $con->setAttribute(
-      PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $this->connections[$name] = $con;
+    $connection->setAttribute(
+      \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+    $this->connections[$name] = $connection;
   }
 
   function getConnection($name = null) {
